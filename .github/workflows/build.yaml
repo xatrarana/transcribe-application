@@ -1,0 +1,62 @@
+name: Build for Windows and Linux
+
+on:
+  push:
+    branches: [ main ]  # Adjust to your branch name if needed
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.10
+
+      - name: 📦 Install Python Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 🛠️ Build Windows Executable
+        run: |
+          pyinstaller --onefile --windowed --name WhisperNepaliApp app.py
+
+      - name: 📤 Upload Windows Executable
+        uses: actions/upload-artifact@v3
+        with:
+          name: WhisperNepaliApp-Windows.exe
+          path: dist/WhisperNepaliApp.exe
+
+
+  build-linux:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.10
+
+      - name: 📦 Install Python Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 🛠️ Build Linux Executable
+        run: |
+          pyinstaller --onefile --windowed --name WhisperNepaliApp app.py
+
+      - name: 📤 Upload Linux Executable
+        uses: actions/upload-artifact@v3
+        with:
+          name: WhisperNepaliApp-Linux
+          path: dist/WhisperNepaliApp
