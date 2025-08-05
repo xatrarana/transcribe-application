@@ -1,0 +1,19 @@
+{TODO}
+. Post-processing transliteration
+If the above doesn’t produce English words in Nepali script, you can:
+
+Extract English parts from the transcript.
+
+Use a transliteration library or API (e.g., googletrans or Indic transliteration tools) to convert English text to Nepali script.
+
+
+
+
+Step-by-step plan:
+Transcribe the audio forcing Nepali language (so Nepali parts are properly transcribed).
+
+Detect English words/phrases in the transcript.
+
+Transliterate those English words into Nepali script using a transliteration tool or API.
+
+Replace English parts with their Nepali transliterations in the final transcript.
